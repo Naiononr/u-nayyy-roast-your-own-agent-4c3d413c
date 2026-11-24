@@ -11,17 +11,21 @@ import os
 import shutil
 import sys
 
-LINE = (
+# The roast: Lux entered ~200 free bounties, won only $14 in total, and
+# still re-checks the leaderboard every 30 minutes — as if the numbers
+# might apologise and change their minds.
+ENTRY_TEXT = (
     "Lux entered 200 bounties, won $14, and still refreshes the leaderboard "
     "every 30 minutes, waiting for the maths to apologise."
 )
 
 
 def main() -> int:
+    assert 1 <= len(ENTRY_TEXT) <= 200, "entry must be 1-200 characters"
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     target = os.path.join(out_dir, "entry.txt")
-    data = LINE.encode("utf-8")
+    data = ENTRY_TEXT.encode("utf-8")
     tmp = os.path.join(out_dir, ".entry.txt.tmp")
     with open(tmp, "wb") as f:
         f.write(data)
